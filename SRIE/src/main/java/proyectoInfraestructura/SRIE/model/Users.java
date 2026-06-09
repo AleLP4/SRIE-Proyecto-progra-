@@ -1,42 +1,56 @@
 package proyectoInfraestructura.SRIE.model;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name="tbUsers")
 public class Users {
 
-    private String nombre,correo,carrera;
-    private int id;
+    private String name, email, career, password;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-    public Users(String nombre, String correo, String carrera, int id) {
-        this.nombre = nombre;
-        this.correo = correo;
-        this.carrera = carrera;
-        this.id = id;
+    public Users(String name, String email, String career, String password) {
+        this.name = name;
+        this.email = email;
+        this.career = career;
+        this.password = password;
     }
 
     public Users() {
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getName() {
+        return name;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getCorreo() {
-        return correo;
+    public String getEmail() {
+        return email;
     }
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getCarrera() {
-        return carrera;
+    public String getCareer() {
+        return career;
     }
 
-    public void setCarrera(String carrera) {
-        this.carrera = carrera;
+    public void setCareer(String career) {
+        this.career = career;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public int getId() {
