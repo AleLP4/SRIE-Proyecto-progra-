@@ -3,16 +3,16 @@ package proyectoInfraestructura.SRIE.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "tbAdmin")
+@Table(name="tbAdmin")
 public class Admin {
 
-    private String name,email, password;
+    private String name,email,password;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    public Admin(String name, String email, String password) {
+    public Admin(String name, String email,String password) {
         this.name = name;
         this.email = email;
         this.password = password;
@@ -20,6 +20,7 @@ public class Admin {
 
     public Admin() {
     }
+
 
     public String getName() {
         return name;
@@ -37,15 +38,7 @@ public class Admin {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

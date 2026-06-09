@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 @Table(name="tbUsers")
 public class Users {
 
-    private String name, email, career, password;
+    private String name,email,career,password;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -20,6 +20,7 @@ public class Users {
 
     public Users() {
     }
+
 
     public String getName() {
         return name;
@@ -53,11 +54,11 @@ public class Users {
         this.password = password;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 }
