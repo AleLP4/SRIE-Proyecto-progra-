@@ -6,15 +6,15 @@ import jakarta.persistence.*;
 @Table(name="tbAdmin")
 public class Admin {
 
-    private String name,mail,password;
+    private String name,email,password;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    public Admin(String name, String mail,String password) {
+    public Admin(String name, String email,String password) {
         this.name = name;
-        this.mail = mail;
+        this.email = email;
         this.password = password;
     }
 
@@ -30,12 +30,12 @@ public class Admin {
         this.name = name;
     }
 
-    public String getMail() {
-        return mail;
+    public String getEmail() {
+        return email;
     }
 
-    public void setMail(String mail) {
-        this.mail = mail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Integer getId() {
