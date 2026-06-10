@@ -2,6 +2,7 @@ package proyectoInfraestructura.SRIE.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import proyectoInfraestructura.SRIE.model.Admin;
 import proyectoInfraestructura.SRIE.model.Users;
 import proyectoInfraestructura.SRIE.repository.AdminJpaRepository;
 import proyectoInfraestructura.SRIE.repository.UsersJpaRepository;
@@ -16,7 +17,9 @@ public class AdminService {
     private AdminJpaRepository AdminRep;
     private UsersJpaRepository UsersRep;
 
-    public List<Users> findAll(){return this.UsersRep.findAll();}
+    public List<Users> findAllUs(){return this.UsersRep.findAll();}
+
+    public List<Admin> findAllAdm(){return this.AdminRep.findAll();}
 
     public Users delete(Integer id) {
         Optional <Users> userExits = this.UsersRep.findById(id);
