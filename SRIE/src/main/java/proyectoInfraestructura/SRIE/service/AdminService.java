@@ -2,6 +2,7 @@ package proyectoInfraestructura.SRIE.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import proyectoInfraestructura.SRIE.model.Admin;
 import proyectoInfraestructura.SRIE.model.Users;
 import proyectoInfraestructura.SRIE.repository.AdminJpaRepository;
 import proyectoInfraestructura.SRIE.repository.UsersJpaRepository;
@@ -13,19 +14,39 @@ import java.util.Optional;
 public class AdminService {
 
     @Autowired
-    private AdminJpaRepository AdminRep;
-    private UsersJpaRepository UsersRep;
+    private AdminJpaRepository adminRep;
+    private UsersJpaRepository usersRep;
 
-    public List<Users> findAll(){return this.UsersRep.findAll();}
+    public List<Users> findAllUs(){return this.usersRep.findAll();}
+
+    public List<Admin> findAllAdm(){return this.adminRep.findAll();}
 
     public Users delete(Integer id) {
-        Optional <Users> userExits = this.UsersRep.findById(id);
+        Optional <Users> userExits = this.usersRep.findById(id);
         if (userExits.isPresent()) {
-            this.UsersRep.deleteById(id);
+            this.usersRep.deleteById(id);
             return (Users)userExits.get();
         } else {
             return null;
         }
     }//eliminar usarios por id
+
+    public Users getById(Integer id) {
+        Users user = this.usersRep.getById(id);
+        if(user==null)
+        {
+            return null;
+        }
+        else {
+            return user;
+        }
+    }
+
+
+    public Admin getAdminByEmail(String email) {
+        return adminRep.getByEmail(email);
+    }
+
+
 }
 

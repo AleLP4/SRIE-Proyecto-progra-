@@ -3,6 +3,7 @@ package proyectoInfraestructura.SRIE.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import proyectoInfraestructura.SRIE.model.Admin;
+import proyectoInfraestructura.SRIE.model.Users;
 
 import java.util.List;
 
@@ -28,6 +29,8 @@ public interface AdminJpaRepository extends JpaRepository<Admin, Integer> {
     Admin getByPassword(String password);
 
     Admin findById(int id);
+
+
 
 
 }

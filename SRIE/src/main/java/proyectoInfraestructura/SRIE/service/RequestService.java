@@ -24,7 +24,7 @@ public class RequestService {
 
 
     public Request add(RequestDTO request) {
-        Admin admin = adminService.getById(request.getAdminEmail());
+        Admin admin = adminService.getAdminByEmail(request.getAdminEmail());
         Users user = usersService.getUserByEmail(request.getUserEmail());
         Request requestTemp = new Request();
 

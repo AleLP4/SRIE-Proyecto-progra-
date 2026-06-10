@@ -53,7 +53,7 @@ public class UsersController {
         return ResponseEntity.ok("Usuario registrado exitosamente");
     }
 
-    @PutMapping("{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<?> update(@PathVariable Integer id, @Valid @RequestBody UsersDTO user) {
         if (service.update(user) == null) {
             return ResponseEntity.notFound().build();
