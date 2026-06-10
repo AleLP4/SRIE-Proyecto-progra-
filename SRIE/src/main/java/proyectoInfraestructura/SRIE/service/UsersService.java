@@ -59,8 +59,12 @@ public class UsersService {
         } else {
             return null;
         }
+        Users userTemp = new Users();
+        userTemp.setName(user.getName());
+        userTemp.setEmail(user.getEmail());
+        userTemp.setCareer(user.getCareer());
 
-        return usersRep.save(userExits);
+        return usersRep.save(userTemp);
     }
 
     public Users delete(Integer id) {
