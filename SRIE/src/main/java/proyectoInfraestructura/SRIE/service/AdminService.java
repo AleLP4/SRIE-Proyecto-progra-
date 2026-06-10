@@ -4,6 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import proyectoInfraestructura.SRIE.model.Admin;
 import proyectoInfraestructura.SRIE.model.Users;
+import proyectoInfraestructura.SRIE.model.dto.AdminDTO;
+import proyectoInfraestructura.SRIE.model.dto.LoginDTO;
+import proyectoInfraestructura.SRIE.model.dto.UsersDTO;
 import proyectoInfraestructura.SRIE.repository.AdminJpaRepository;
 import proyectoInfraestructura.SRIE.repository.UsersJpaRepository;
 
@@ -21,15 +24,15 @@ public class AdminService {
 
     public List<Admin> findAllAdm(){return this.adminRep.findAll();}
 
-    public Users delete(Integer id) {
-        Optional <Users> userExits = this.usersRep.findById(id);
-        if (userExits.isPresent()) {
-            this.usersRep.deleteById(id);
-            return (Users)userExits.get();
-        } else {
-            return null;
-        }
-    }//eliminar usarios por id
+//    public Users delete(Integer id) {
+//        Optional <Users> userExits = this.usersRep.findById(id);
+//        if (userExits.isPresent()) {
+//            this.usersRep.deleteById(id);
+//            return (Users)userExits.get();
+//        } else {
+//            return null;
+//        }
+//    }//eliminar usarios por id
 
     public Admin getById(Integer id) {
         Admin admin = this.adminRep.findById(id.intValue());
@@ -43,9 +46,68 @@ public class AdminService {
     }
 
 
+    public Admin add(AdminDTO admin) {
+        if (adminRep.existsByEmail(admin.getEmail())) {
+            return null;
+        } else {
+            if (admin.getName() == null || admin.getEmail() == null || admin.getPassword() == null) {
+                return null;
+            }
+        }
+        Admin admin1 = new Admin();
+        admin1.setName(admin.getName());
+        admin1.setEmail(admin.getEmail());
+        admin1.setPassword(admin.getPassword());
+
+        return adminRep.save(admin1);
+    }
+
+
     public Admin getAdminByEmail(String email) {
         return adminRep.getByEmail(email);
     }
+
+
+
+    public Admin update(AdminDTO admin) {
+        Admin adminExits = adminRep.getByEmail(admin.getEmail());
+        if (adminExits != null) {
+            if (admin.getName() != null) {
+                adminExits.setName(admin.getName());
+            }
+            if (admin.getPassword() != null) {
+                adminExits.setPassword(admin.getPassword());
+            }
+
+        } else {
+            return null;
+        }
+        return adminRep.save(adminExits);
+    }
+
+
+
+    public Admin delete(Integer id) {
+        Optional<Admin> adminExits = adminRep.findById(id);
+        if (adminExits.isPresent()) {
+            adminRep.deleteById(id);
+            return (Admin) adminExits.get();
+        } else {
+            return null;
+        }
+    }
+
+    public Boolean login(LoginDTO login) {
+        Admin adminExits = adminRep.getByEmail(login.getEmail());
+        if (adminExits != null) {
+            if (login.getPassword().equals(adminExits.getPassword())) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 
 }
 
