@@ -14,20 +14,38 @@ import java.util.Optional;
 public class AdminService {
 
     @Autowired
-    private AdminJpaRepository AdminRep;
-    private UsersJpaRepository UsersRep;
+    private AdminJpaRepository adminRep;
+    private UsersJpaRepository usersRep;
 
-    public List<Users> findAllUs(){return this.UsersRep.findAll();}
+    public List<Users> findAllUs(){return this.usersRep.findAll();}
 
-    public List<Admin> findAllAdm(){return this.AdminRep.findAll();}
+    public List<Admin> findAllAdm(){return this.adminRep.findAll();}
 
     public Users delete(Integer id) {
-        Optional <Users> userExits = this.UsersRep.findById(id);
+        Optional <Users> userExits = this.usersRep.findById(id);
         if (userExits.isPresent()) {
-            this.UsersRep.deleteById(id);
+            this.usersRep.deleteById(id);
             return (Users)userExits.get();
         } else {
             return null;
         }
     }//eliminar usarios por id
+
+    public Admin getById(Integer id) {
+        Admin admin = this.adminRep.findById(id.intValue());
+        if(admin==null)
+        {
+            return null;
+        }
+        else {
+            return admin;
+        }
+    }
+
+
+    public Admin getAdminByEmail(String email) {
+        return adminRep.getByEmail(email);
+    }
+
 }
+
