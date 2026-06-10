@@ -18,14 +18,6 @@ public class AdminService {
 
     public List<Users> findAll(){return this.UsersRep.findAll();}
 
-    public Users delete(Integer id) {
-        Optional <Users> userExits = this.UsersRep.findById(id);
-        if (userExits.isPresent()) {
-            this.UsersRep.deleteById(id);
-            return (Users)userExits.get();
-        } else {
-            return null;
-        }
-    }//eliminar usarios por id
+  
 }
 
