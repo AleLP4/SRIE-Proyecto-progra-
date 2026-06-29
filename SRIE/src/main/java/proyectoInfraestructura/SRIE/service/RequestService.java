@@ -46,6 +46,47 @@ public class RequestService {
         return requestRep.save(requestTemp);
     }
 
+    public Request update (RequestDTO request, Integer id)
+    {
+        Admin admin = adminService.getAdminByEmail(request.getAdminEmail());
+        Users user = usersService.getUserByEmail(request.getUserEmail());
+
+        if(admin == null || user == null){
+            return null;
+        }
+        if(requestRep.existsById(id))
+        {
+            Request requestTemp = requestRep.findById(id.intValue()).get();
+            requestTemp.setAdmin(admin);
+            requestTemp.setUser(user);
+
+            requestTemp.setTitle(request.getTitle());
+            requestTemp.setDescription(request.getDescription());
+            requestTemp.setLocation(request.getLocation());
+            requestTemp.setUrgency(Urgency.valueOf(request.getUrgency().toUpperCase()));
+            requestTemp.setStatus(Status.valueOf(request.getStatus().toUpperCase()));
+            requestTemp.setRequestDate(request.getRequestDate());
+
+            return requestRep.save(requestTemp);
+        }
+
+       return null;
+    }
+
+    public String deleteById (Integer id)
+    {
+
+        if(requestRep.existsById(id))
+        {
+            requestRep.deleteById(id);
+            return "Exito!";
+        }
+
+        return null;
+
+
+    }
+
 
 
 

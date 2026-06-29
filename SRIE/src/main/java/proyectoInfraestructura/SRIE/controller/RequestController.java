@@ -54,6 +54,39 @@ public class RequestController {
         return ResponseEntity.ok("Solicitud registrada exitosamente");
     }
 
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteById (@PathVariable Integer id)
+    {
+        if(service.deleteById(id).equals("Exito!"))
+        {
+            return ResponseEntity.ok().body("Exito!");
+        }
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontro esa solicitud");
+    }
+
+
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<?> update(@Valid @RequestBody RequestDTO request,@PathVariable Integer id,BindingResult result) {
+        if (result.hasErrors()) {
+            List<String> errors = new ArrayList<>();
+
+            for (ObjectError error : result.getAllErrors()) {
+                errors.add(error.getDefaultMessage());
+            }
+
+            return ResponseEntity.badRequest().body(errors);
+        }
+
+        Request newRequest = service.update(request,id);
+
+        if (newRequest == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No se pudo actualizar la solicitud");
+        }
+
+        return ResponseEntity.ok("Solicitud actualizada exitosamente");
+    }
 
 }
 
