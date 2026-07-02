@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/users")
 public class UsersController {
     @Autowired
@@ -55,7 +56,7 @@ public class UsersController {
 
     @PutMapping("{id}")
     public ResponseEntity<?> update(@PathVariable Integer id, @Valid @RequestBody UsersDTO user) {
-        if (service.update(user) == null) {
+        if (service.update(user,id) == null) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok("Usuario actualizado exitosamente");
@@ -70,7 +71,7 @@ public class UsersController {
         return ResponseEntity.ok("Usuario eliminado exitosamente");
     }
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     public ResponseEntity<?> login(@Valid @RequestBody LoginDTO login) {
         if (service.login(login) == false) {
             return ResponseEntity.ok(false);

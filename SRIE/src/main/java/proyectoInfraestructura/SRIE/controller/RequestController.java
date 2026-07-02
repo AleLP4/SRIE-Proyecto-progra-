@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RequestMapping("/request")
+@CrossOrigin(origins = "*")
 @RestController
 public class RequestController {
 

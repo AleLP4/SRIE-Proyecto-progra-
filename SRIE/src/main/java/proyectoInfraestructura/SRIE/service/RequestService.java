@@ -27,13 +27,11 @@ public class RequestService {
         Admin admin = adminService.getAdminByEmail(request.getAdminEmail());
         Users user = usersService.getUserByEmail(request.getUserEmail());
 
-        if(admin == null || user == null){
+        if(user == null){
             return null;
         }
 
         Request requestTemp = new Request();
-
-        requestTemp.setAdmin(admin);
         requestTemp.setUser(user);
 
         requestTemp.setTitle(request.getTitle());
@@ -48,12 +46,17 @@ public class RequestService {
 
     public Request update (RequestDTO request, Integer id)
     {
-        Admin admin = adminService.getAdminByEmail(request.getAdminEmail());
         Users user = usersService.getUserByEmail(request.getUserEmail());
 
-        if(admin == null || user == null){
+        Admin admin = null;
+        if (request.getAdminEmail() != null && !request.getAdminEmail().trim().isEmpty()) {
+            admin = adminService.getAdminByEmail(request.getAdminEmail());
+        }
+
+        if(user == null || (request.getAdminEmail() != null && !request.getAdminEmail().trim().isEmpty() && admin == null)){
             return null;
         }
+
         if(requestRep.existsById(id))
         {
             Request requestTemp = requestRep.findById(id.intValue()).get();

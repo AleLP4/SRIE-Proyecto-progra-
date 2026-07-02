@@ -43,20 +43,25 @@ public class UsersService {
         return null;
     }
 
-    public Users update(UsersDTO user) {
-        Users usersExits = usersRep.getByEmail(user.getEmail());
-        if (usersExits != null) {
+    public Users update(UsersDTO user, int id)
+    {
+        if (usersRep.existsById(id))
+        {
+            Users user1 = usersRep.findById(id);
             if (user.getName() != null) {
-                usersExits.setName(user.getName());
+                user1.setName(user.getName());
             }
             if (user.getPassword() != null) {
-                usersExits.setPassword(user.getPassword());
+                user1.setPassword(user.getPassword());
             }
-
-        } else {
-            return null;
+            if(user.getCareer()!=null)
+            {
+                user1.setCareer(user.getCareer());
+            }
+            return usersRep.save(user1);
         }
-        return usersRep.save(usersExits);
+            return null;
+
     }
 
     public Users delete(Integer id) {

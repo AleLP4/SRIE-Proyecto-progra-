@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/admin")
 public class AdminController {
 
@@ -106,7 +107,7 @@ public class AdminController {
         return ResponseEntity.ok("Usuario eliminado exitosamente");
     }
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     public ResponseEntity<?> login(@Valid @RequestBody LoginDTO login) {
         if (service.login(login) == false) {
             return ResponseEntity.ok(false);
