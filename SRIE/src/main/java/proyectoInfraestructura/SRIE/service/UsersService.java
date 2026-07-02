@@ -58,6 +58,10 @@ public class UsersService {
             {
                 user1.setCareer(user.getCareer());
             }
+            if(user.getEmail()!=null)
+            {
+                user1.setEmail(user.getEmail());
+            }
             return usersRep.save(user1);
         }
             return null;

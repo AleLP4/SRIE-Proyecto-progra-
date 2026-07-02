@@ -69,20 +69,26 @@ public class AdminService {
 
 
 
-    public Admin update(AdminDTO admin) {
-        Admin adminExits = adminRep.getByEmail(admin.getEmail());
-        if (adminExits != null) {
-            if (admin.getName() != null) {
+    public Admin update(AdminDTO admin, Integer id) {
+
+        if (adminRep.existsById(id)) {
+            Admin adminExits = adminRep.getById(id);
+
+            if (admin.getName() != null && !admin.getName().trim().isEmpty()) {
                 adminExits.setName(admin.getName());
             }
-            if (admin.getPassword() != null) {
+
+            if (admin.getEmail() != null && !admin.getEmail().trim().isEmpty()) {
+                adminExits.setEmail(admin.getEmail());
+            }
+
+            if (admin.getPassword() != null && !admin.getPassword().trim().isEmpty()) {
                 adminExits.setPassword(admin.getPassword());
             }
 
-        } else {
-            return null;
+            return adminRep.save(adminExits);
         }
-        return adminRep.save(adminExits);
+        return null;
     }
 
 

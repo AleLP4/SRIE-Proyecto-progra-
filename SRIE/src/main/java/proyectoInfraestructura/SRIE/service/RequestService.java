@@ -2,6 +2,7 @@ package proyectoInfraestructura.SRIE.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import proyectoInfraestructura.SRIE.model.*;
 import proyectoInfraestructura.SRIE.service.*;
 import proyectoInfraestructura.SRIE.model.dto.RequestDTO;
@@ -9,7 +10,7 @@ import proyectoInfraestructura.SRIE.repository.RequestJpaRepository;
 
 import java.util.List;
 
-@Repository
+@Service
 public class RequestService {
     @Autowired
     private RequestJpaRepository requestRep;

@@ -92,7 +92,7 @@ public class AdminController {
 //        service.update(admin);
 //        return ResponseEntity.ok("Actualizado correctamente");
 
-        if (service.update(admin) == null) {
+        if (service.update(admin,id) == null) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok("Usuario actualizado exitosamente");

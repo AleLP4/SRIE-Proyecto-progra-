@@ -58,7 +58,7 @@ public class RequestController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteById (@PathVariable Integer id)
     {
-        if(service.deleteById(id).equals("Exito!"))
+        if(service.deleteById(id).equalsIgnoreCase("Exito!"))
         {
             return ResponseEntity.ok().body("Exito!");
         }
